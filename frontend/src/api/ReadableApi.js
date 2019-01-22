@@ -13,21 +13,21 @@ const headers = {
 export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => console.log('all categories', data))
+    .then(data => data)
     .catch(err => console.log(err))
 
 // Get all of the posts for a particular category
 export const getCategoryPosts = category => 
   fetch(`${api}/${category}/posts`, { headers })
   .then(res => res.json())
-  .then(data => console.log('category by category name', data))
+  .then(data => data)
   .catch(err => console.log(err))
 
 // Get all of the posts. Useful for the main page when no category is selected.
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
-    .then(data => console.log('all posts', data))
+    .then(data => data)
     .catch(err => console.log(err))
 
 // Add a new post
@@ -45,14 +45,14 @@ export const addPost = async (post) => {
     })
   })
   const content = await rawResponse.json();
-  console.log(content)
+  return content;
 }
 
 // Get the details of a single post
 export const getPostDetail = id => 
   fetch(`${api}/posts/${id}`, { headers })
   .then(res => res.json())
-  .then(data => console.log('Get post detail by id', data))
+  .then(data => data)
   .catch(err => console.log(err))
 
 // Used for voting on a post
@@ -65,7 +65,7 @@ export const votePost = async (id, vote) => {
     })
   })
   const content = await rawResponse.json();
-  console.log('vote', content)
+  return content;
 }
 
 // Edit the details of an existing post
@@ -79,21 +79,21 @@ export const editPost = async (id, editOptions) => {
     })
   })
   const content = await rawResponse.json();
-  console.log('edited Post', content)
+  return content;
 }
 
 // Delete a post
 export const deletePost = id => 
   fetch(`${api}/posts/${id}`, { method: 'DELETE', headers, })
     .then(res => res.json())
-    .then(data => console.log('Delete post', data))
+    .then(data => data)
     .catch(err => console.log(err))
 
 // Get all the comments for a single post
 export const getPostComments = id => 
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
-    .then(data => console.log('comments', data))
+    .then(data => data)
     .catch(err => console.log(err))
 
 // Add a comment to a post
@@ -110,14 +110,14 @@ export const addComment = async (parentId, postComment) => {
     })
   })
   const content = await rawResponse.json();
-  console.log('comment on post', content)
+  return content;
 }
 
 // Get the details for a single comment
 export const getCommentById = id => 
   fetch(`${api}/comments/${id}`, { headers })
     .then(res => res.json())
-    .then(data => console.log('getCommentById', data))
+    .then(data => data)
     .catch(err => console.log(err))
 
 // Used for voting on a comment.
@@ -130,7 +130,7 @@ export const voteComment = async (id, vote) => {
     })
   })
   const content = await rawResponse.json();
-  console.log('vote comment', content)
+  return content;
 }
 
 // Edit the details of an existing comment
@@ -144,12 +144,12 @@ export const editComment = async (id, editOptions) => {
     })
   })
   const content = await rawResponse.json();
-  console.log('edited comment', content)
+  return content;
 }
 
 // Delete a post
 export const deleteComment = id => 
   fetch(`${api}/comments/${id}`, { method: 'DELETE', headers, })
     .then(res => res.json())
-    .then(data => console.log('Delete comment', data))
+    .then(data => data)
     .catch(err => console.log(err))
