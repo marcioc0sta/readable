@@ -2,6 +2,7 @@ import {
   RECEIVE_POSTS,
   ORDER_POSTS_BY_DATE,
   ORDER_POSTS_BY_VOTESCORE,
+  POSTVOTE,
 } from '../actions/posts';
 
 export default function posts (state = {}, action) {
@@ -26,6 +27,16 @@ export default function posts (state = {}, action) {
       return {
         ...state,
         ...orderedByVote,
+      }
+    case POSTVOTE:
+      const { post } = action;
+      const votedKey = Object.keys(state).find(key => state[key].id === post.id);
+      return {
+        ...state,
+        [votedKey]: {
+          ...state[votedKey],
+          voteScore: post.voteScore
+        }
       }
     default:
       return state;

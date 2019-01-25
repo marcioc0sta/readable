@@ -8,8 +8,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { styles } from'./PostListItem.styles';
 
+import voteTypes from '../../helpers/voteTypes';
+
 const PostListItem = props => {
-  const { classes, post } = props;
+  const { classes, post, postVote } = props;
+  const { upvote, downvote } = voteTypes;
 
   return (
     <Card className={classes.card}>
@@ -25,11 +28,17 @@ const PostListItem = props => {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions} disableActionSpacing>
-        {/* todo: passar action de up and downvote */}
-        <Button className={classes.upVote} variant="outlined">
+        <Button 
+          onClick={() => postVote(post.id, upvote)} 
+          className={classes.upVote} 
+          variant="outlined"
+        >
           <i className="fas fa-thumbs-up"></i>
         </Button>
-        <Button variant="outlined">
+        <Button 
+          onClick={() => postVote(post.id, downvote)} 
+          variant="outlined"
+        >
           <i className="fas fa-thumbs-down"></i>
         </Button>
         {/* todo: onlclick vai para rota do post */}

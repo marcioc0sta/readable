@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { orderPostsByTime, orderPostsByvote } from '../../actions/posts';
 import PostListItem from '../PostListItem/PostListItem';
-import Button from '@material-ui/core/Button';
+import { handlePostVote } from '../../actions/posts';
 
 import * as Styled from './PostList.styles';
 
 class PostList extends Component {
+  postVote = (id, vote) => {
+    const { dispatch } = this.props;
+    return dispatch(handlePostVote(id, vote));
+  }
+
   render() {
     const { dispatch, postList } = this.props;
     return (
@@ -34,8 +39,11 @@ class PostList extends Component {
 
         <ul>
           {postList.map(post => (
-            <PostListItem post={post} key={post.id}>
-            </PostListItem>
+            <PostListItem 
+              postVote={this.postVote} 
+              post={post} 
+              key={post.id} 
+            />
           ))}
         </ul>
       </Styled.Container>
