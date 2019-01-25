@@ -14,7 +14,8 @@ class PostList extends Component {
   }
 
   render() {
-    const { dispatch, postList } = this.props;
+    const { dispatch, postList, postsOrdering } = this.props;
+
     return (
       <Styled.Container>
         <Styled.TitleContainer>
@@ -24,11 +25,13 @@ class PostList extends Component {
           <Styled.OrderByWrapper>
             <Typography color="textSecondary">orderBy:</Typography>
               <Styled.OrderByButtons 
+                active={postsOrdering.orderBy === 'date'}
                 title="date"
                 onClick={() => dispatch(orderPostsByTime(postList))} 
                 className="fas fa-calendar"
               />
               <Styled.OrderByButtons 
+                active={postsOrdering.orderBy === 'votescore'}
                 title="votescore" 
                 onClick={() => dispatch(orderPostsByvote(postList))} 
                 className="fas fa-thumbs-up"
@@ -51,10 +54,11 @@ class PostList extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ posts, postsOrdering }) => {
   const postList = [].concat(Object.values(posts));
   return {
-    postList
+    postList,
+    postsOrdering,
   }
 }
 
