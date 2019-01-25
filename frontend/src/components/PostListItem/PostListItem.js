@@ -27,10 +27,10 @@ const PostListItem = props => {
       <CardActions className={classes.actions} disableActionSpacing>
         {/* todo: passar action de up and downvote */}
         <Button className={classes.upVote} variant="outlined">
-          <i class="fas fa-thumbs-up"></i>
+          <i className="fas fa-thumbs-up"></i>
         </Button>
         <Button variant="outlined">
-          <i class="fas fa-thumbs-down"></i>
+          <i className="fas fa-thumbs-down"></i>
         </Button>
         {/* todo: onlclick vai para rota do post */}
         <Button 
