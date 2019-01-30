@@ -3,6 +3,7 @@ import {
   ORDER_POSTS_BY_DATE,
   ORDER_POSTS_BY_VOTESCORE,
   POSTVOTE,
+  ADD_POST,
 } from '../actions/posts';
 
 export default function posts (state = {}, action) {
@@ -37,6 +38,12 @@ export default function posts (state = {}, action) {
           ...state[votedKey],
           voteScore: post.voteScore
         }
+      }
+    case ADD_POST:
+      const defineKey = Object.keys(state).length;
+      return {
+        ...state,
+        [defineKey]: action.post
       }
     default:
       return state;

@@ -1,0 +1,93 @@
+import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+
+import { handleAddPost } from '../../actions/posts';
+
+import { styles } from './AddPostForm.styles';
+
+class AddPostForm extends Component {
+  state = {
+    timestamp: Date.now(),
+    title: '',
+    body: '',
+    author: '',
+    category: '',
+  };
+
+  handleChange = fieldValue => event => {
+    this.setState({
+      [fieldValue]: event.target.value,
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { dispatch, handleDialogClose } = this.props;
+    const post = this.state;
+
+    dispatch(handleAddPost(post)).then(handleDialogClose());
+  }
+
+  render() {
+    const { classes, handleDialogClose } = this.props;
+
+    return (
+      <form className={classes.container} onSubmit={e => this.handleSubmit(e)} autoComplete="off">
+        <TextField
+          required
+          id="post-title"
+          label="Title"
+          className={classes.textField}
+          value={this.state.title}
+          onChange={this.handleChange('title')}
+          margin="normal"
+        />
+        <TextField
+          required
+          id="post-body"
+          label="Body"
+          multiline
+          rows="4"
+          value={this.state.body}
+          onChange={this.handleChange('body')}
+          className={classes.textField}
+          margin="normal"
+        />
+        <TextField
+          required
+          id="post-author"
+          label="Author"
+          className={classes.textField}
+          value={this.state.author}
+          onChange={this.handleChange('author')}
+          margin="normal"
+        />
+        {/* TODO: mudar isso para select com as categorias */}
+        <TextField
+          required
+          id="post-category"
+          label="Category"
+          className={classes.textField}
+          value={this.state.category}
+          onChange={this.handleChange('category')}
+          margin="normal"
+        />
+        <div className={classes.buttonWrapper}>
+          <Button className={classes.button} onClick={handleDialogClose} >
+            Close
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Add post
+          </Button>
+        </div>
+      </form>
+    )
+  }
+
+}
+
+export default connect()(withStyles(styles)(AddPostForm));
