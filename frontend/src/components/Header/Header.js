@@ -49,7 +49,13 @@ class Header extends Component {
           <Typography variant="h6" color="inherit">
             {title}
           </Typography>
-          <Button onClick={this.handleDialogOpen} className={classes.addPost} color="inherit">Add post</Button>
+          <Button 
+            onClick={this.handleDialogOpen}
+            className={classes.addPost} 
+            color="inherit"
+          >
+            Add post
+          </Button>
         </Toolbar>
         {this.renderDialog()}
       </AppBar>

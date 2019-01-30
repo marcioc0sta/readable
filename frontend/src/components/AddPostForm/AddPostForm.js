@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -33,16 +34,21 @@ class AddPostForm extends Component {
   }
 
   render() {
-    const { classes, handleDialogClose } = this.props;
+    const { classes, handleDialogClose, categories } = this.props;
+    const { title, body, author, category } = this.state
 
     return (
-      <form className={classes.container} onSubmit={e => this.handleSubmit(e)} autoComplete="off">
+      <form
+        className={classes.container} 
+        onSubmit={e => this.handleSubmit(e)}
+        autoComplete="off"
+      >
         <TextField
           required
           id="post-title"
           label="Title"
           className={classes.textField}
-          value={this.state.title}
+          value={title}
           onChange={this.handleChange('title')}
           margin="normal"
         />
@@ -52,7 +58,7 @@ class AddPostForm extends Component {
           label="Body"
           multiline
           rows="4"
-          value={this.state.body}
+          value={body}
           onChange={this.handleChange('body')}
           className={classes.textField}
           margin="normal"
@@ -62,20 +68,31 @@ class AddPostForm extends Component {
           id="post-author"
           label="Author"
           className={classes.textField}
-          value={this.state.author}
+          value={author}
           onChange={this.handleChange('author')}
           margin="normal"
         />
-        {/* TODO: mudar isso para select com as categorias */}
         <TextField
-          required
           id="post-category"
+          select
           label="Category"
           className={classes.textField}
-          value={this.state.category}
+          value={category}
           onChange={this.handleChange('category')}
+          SelectProps={{
+            MenuProps: {
+              className: classes.menu,
+            },
+          }}
+          helperText="Please select one category"
           margin="normal"
-        />
+        >
+          {categories.map(option => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField>
         <div className={classes.buttonWrapper}>
           <Button className={classes.button} onClick={handleDialogClose} >
             Close
@@ -87,7 +104,14 @@ class AddPostForm extends Component {
       </form>
     )
   }
-
 }
 
-export default connect()(withStyles(styles)(AddPostForm));
+const mapStateToProps = ({ categories }) => {
+  const categoriesArr = Object.values(categories).map(item => item.name);
+  return {
+    categories: categoriesArr,
+  }
+}
+
+
+export default connect(mapStateToProps)(withStyles(styles)(AddPostForm));

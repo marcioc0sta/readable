@@ -6,6 +6,9 @@ const styles = theme => ({
   textField: {
     width: '100%',
   },
+  menu: {
+    width: '100%',
+  },
   buttonWrapper: {
     marginLeft: 'auto',
     marginTop: 20,
