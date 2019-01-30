@@ -1,4 +1,4 @@
-const styles = theme => ({
+const styles = () => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',

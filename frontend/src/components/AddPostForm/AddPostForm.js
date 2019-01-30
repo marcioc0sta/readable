@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
+import categoriesArr from '../../helpers/categoriesArr';
+
 import { handleAddPost } from '../../actions/posts';
 
 import { styles } from './AddPostForm.styles';
@@ -64,7 +66,7 @@ class AddPostForm extends Component {
           margin="normal"
         />
         <TextField
-          required
+          required  
           id="post-author"
           label="Author"
           className={classes.textField}
@@ -107,9 +109,8 @@ class AddPostForm extends Component {
 }
 
 const mapStateToProps = ({ categories }) => {
-  const categoriesArr = Object.values(categories).map(item => item.name);
   return {
-    categories: categoriesArr,
+    categories: categoriesArr(categories),
   }
 }
 
