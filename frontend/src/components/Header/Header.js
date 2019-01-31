@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { NavLink } from 'react-router-dom';
 
 import AddPostForm from '../AddPostForm/AddPostForm';
 
@@ -46,9 +47,11 @@ class Header extends Component {
     return (
       <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" color="inherit">
-            {title}
-          </Typography>
+          <NavLink className={classes.homeLink} to="/">
+            <Typography variant="h6" color="inherit">
+              {title}
+            </Typography>
+          </NavLink>
           <Button 
             onClick={this.handleDialogOpen}
             className={classes.addPost} 

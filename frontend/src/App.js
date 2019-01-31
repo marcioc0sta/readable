@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialData, handleGetAllCategories } from './actions/shared'
-import Header from './components/Header/Header';
-import PostList from './components/PostList/PostList';
-import CategoriesList from './components/CategoriesList/CategoriesList';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import AllPostsPage from './pages/AllPostsPage';
+import PostsFromCategory from './pages/PostsFromCategory';
 
 class App extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(handleInitialData()) ;
+    dispatch(handleInitialData());
     dispatch(handleGetAllCategories());
   }
   render() {
     return (
-      <div className="App">
-        <Header title="Readable app" />
-        <CategoriesList />
-        <PostList />
-      </div>
+      <Router>
+        <div className="App">
+          <Route path="/" exact component={AllPostsPage} />
+          <Route path="/category/:catName" exact component={PostsFromCategory} />
+        </div>
+      </Router>
     );
   }
 }

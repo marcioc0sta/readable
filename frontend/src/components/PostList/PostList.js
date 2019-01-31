@@ -14,13 +14,13 @@ class PostList extends Component {
   }
 
   render() {
-    const { dispatch, postList, postsOrdering } = this.props;
+    const { dispatch, postList, postsOrdering, listTitle } = this.props;
 
     return (
       <Styled.Container>
         <Styled.TitleContainer>
           <Typography variant="h6" gutterBottom>
-            All Posts
+            {listTitle}
           </Typography>
           <Styled.OrderByWrapper>
             <Typography color="textSecondary">orderBy:</Typography>
@@ -39,7 +39,6 @@ class PostList extends Component {
           </Styled.OrderByWrapper>
         </Styled.TitleContainer>
         <hr />
-
         <ul>
           {postList.map(post => (
             <PostListItem 
@@ -54,10 +53,8 @@ class PostList extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, postsOrdering }) => {
-  const postList = [].concat(Object.values(posts));
+const mapStateToProps = ({ postsOrdering }) => {
   return {
-    postList,
     postsOrdering,
   }
 }
