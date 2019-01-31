@@ -7,6 +7,7 @@ import CategoriesList from '../components/CategoriesList/CategoriesList';
 
 const PostsFromCategory = props => {
   const { postList } = props;
+  const categoryName = props.location.pathname.replace('/category/', '');
 
   return (
     <Fragment>

@@ -10,11 +10,6 @@ import categoriesArr from '../../helpers/categoriesArr';
 import * as Styled  from './CategoriesList.styles';
 
 const CategoriesList = props => {
-  // todo: ao clicar, ir para a respectiva categoria
-  const handleClick = name => {
-    // alert(`clicked on the ${name}`)
-  }
-
   const { categories, classes } = props;
 
   return (
@@ -25,13 +20,16 @@ const CategoriesList = props => {
       {
         categories.map(category => {
           return (
-            <NavLink style={{textDecoration: 'none'}} to={`/category/${category}`}>
+            <NavLink 
+              key={category}
+              style={{textDecoration: 'none'}}
+              to={`/category/${category}`}
+            >
               <Chip
                 color="primary"
-                key={category}
                 className={classes.chip}
                 label={category}
-                onClick={() => handleClick(category)}
+                onClick={() => {}}
                 variant="outlined"
               />
             </NavLink>
