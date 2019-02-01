@@ -3,14 +3,25 @@ import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
+import getCategoryName from '../../helpers/getCategoryName';
+import { handlePostsFromCategory } from '../../actions/categories';
 import categoriesArr from '../../helpers/categoriesArr';
 
-import * as Styled  from './CategoriesList.styles';
+import * as Styled from './CategoriesList.styles';
 
 const CategoriesList = props => {
   const { categories, classes } = props;
+
+  const handleClick = name => {
+    const { history, dispatch } = props
+
+    dispatch(handlePostsFromCategory(name))
+      .then(history.push(`/category/${name}`))
+  }
+
+  const activeCategory = getCategoryName(props.location.pathname);
 
   return (
     <Styled.Container>
@@ -20,19 +31,14 @@ const CategoriesList = props => {
       {
         categories.map(category => {
           return (
-            <NavLink 
+            <Chip
               key={category}
-              style={{textDecoration: 'none'}}
-              to={`/category/${category}`}
-            >
-              <Chip
-                color="primary"
-                className={classes.chip}
-                label={category}
-                onClick={() => {}}
-                variant="outlined"
-              />
-            </NavLink>
+              color="primary"
+              className={classes.chip}
+              label={category}
+              onClick={() => handleClick(category)}
+              variant={category === activeCategory ? 'default' : 'outlined'}
+            />
           )
         })
       }
@@ -46,4 +52,6 @@ const mapStateToProps = ({ categories }) => {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(Styled.styles)(CategoriesList));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(Styled.styles)(CategoriesList))
+);
