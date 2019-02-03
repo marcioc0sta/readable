@@ -1,8 +1,9 @@
-import { getPostDetail, getPostComments } from '../api/ReadableApi';
+import { getPostDetail, getPostComments, voteComment } from '../api/ReadableApi';
 
 export const GET_POST_DETAIL = 'GET_POST_DETAIL';
 export const GET_POST_COMMENTS = 'GET_POST_COMMENTS';
 export const ORDER_COMMENTS_BY_VOTESCORE = 'ORDER_COMMENTS_BY_VOTESCORE';
+export const COMMENTVOTE = 'COMMENTVOTE';
 
 function postDetail(post) {
   return {
@@ -24,6 +25,26 @@ export function orderCommentsByvote(comments) {
     comments,
   }
 }
+
+function commentVote(comment) {
+  return {
+    type: COMMENTVOTE,
+    comment,
+  }
+}
+
+export function handleCommentVote(id, vote) {
+  return dispatch => {
+    return voteComment(id, vote)
+      .then(result => {
+        dispatch(commentVote(result));
+      })
+      .catch(e => {
+        console.warn('Error in voteComment: ', e);
+      });
+  };
+};
+
 
 export function handleGetPostComments(id) {
   return dispatch => {

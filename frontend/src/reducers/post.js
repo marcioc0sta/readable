@@ -1,8 +1,9 @@
-import { 
+import {
   GET_POST_DETAIL,
   GET_POST_COMMENTS,
   ORDER_COMMENTS_BY_VOTESCORE,
- } from '../actions/post';
+  COMMENTVOTE,
+} from '../actions/post';
 
 export default function post(state = {}, action) {
   switch (action.type) {
@@ -22,7 +23,19 @@ export default function post(state = {}, action) {
       });
       return {
         ...state,
-        ...orderedByVote,
+        comments: [
+          ...orderedByVote,
+        ]
+      }
+    case COMMENTVOTE:
+      const { comment } = action;      
+      const updatedComments = state.comments.map(item => (
+        item.id === comment.id ? comment : item
+      ));
+
+      return {
+        ...state,
+        comments: updatedComments,
       }
     default:
       return state;

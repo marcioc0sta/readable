@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 
-import { handleGetPostComments } from '../../actions/post';
+import { handleGetPostComments, handleCommentVote } from '../../actions/post';
 
 import NoItems from '../NoItems/NoItems';
 import CommentListItem from '../CommentListItem/CommentListItem';
@@ -13,6 +13,11 @@ class CommentsLIst extends Component {
   componentDidMount() {
     const { dispatch, postId } = this.props;
     dispatch(handleGetPostComments(postId));
+  }
+
+  commentVote = (id, vote) => {
+    const { dispatch } = this.props;
+    return dispatch(handleCommentVote(id, vote));
   }
 
   handleList = () => {
@@ -29,7 +34,7 @@ class CommentsLIst extends Component {
       <Styled.CommentsList>
         {commentsList.map(comment => (
           <li key={comment.id} >
-            <CommentListItem comment={comment} />
+            <CommentListItem commentVote={this.commentVote} comment={comment} />
           </li>
         ))}
       </Styled.CommentsList>

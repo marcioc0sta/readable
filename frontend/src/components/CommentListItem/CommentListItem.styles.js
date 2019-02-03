@@ -9,7 +9,13 @@ const styles = () => ({
   },
   textSecondary: {
     fontSize: 13,
-  }
+  },
+  actions: {
+    display: 'flex',
+  },
+  upVote: {
+    marginRight: '10px',
+  },
 })
 
 export {
