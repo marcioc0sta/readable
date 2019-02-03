@@ -4,6 +4,10 @@ import { get } from 'lodash';
 
 import { handleGetPostComments } from '../../actions/post';
 
+import CommentListItem from '../CommentListItem/CommentListItem';
+
+import * as Styled from './CommentsLIst.styles'
+
 class CommentsLIst extends Component {
   componentDidMount() {
     const { dispatch, postId } = this.props;
@@ -15,11 +19,13 @@ class CommentsLIst extends Component {
     const commentsList = get(post, 'comments', []);
 
     return (
-      <ul>
+      <Styled.CommentsList>
         {commentsList.map(comment => (
-          <li key={comment.id} >{comment.id}</li>
+          <li key={comment.id} >
+            <CommentListItem comment={comment} />
+          </li>
         ))}
-      </ul>
+      </Styled.CommentsList>
     )
   }
 }

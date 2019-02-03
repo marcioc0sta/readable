@@ -29,7 +29,7 @@ const Post = props => {
       <Typography color="textSecondary" gutterBottom>
         in: {category}
       </Typography>
-      <Typography variant="h4" gutterBottom>
+      <Typography className={classes.postTitle} variant="h3" gutterBottom>
         {title}
       </Typography>
       <hr />
@@ -37,7 +37,7 @@ const Post = props => {
         by: {author} / voteScore: {voteScore} / Post date: {date}
       </Typography>
       <br />
-      <Typography variant="body1" gutterBottom>
+      <Typography className={classes.postText} variant="body1" gutterBottom>
         {body}
       </Typography>
       <br />

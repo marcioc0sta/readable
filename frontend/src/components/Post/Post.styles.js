@@ -17,6 +17,14 @@ const CommentLine = styled.hr`
 `
 
 const styles = theme => ({
+  postTitle: {
+    fontFamily: 'Merriweather, serif',
+    lineHeight: 1.5,
+  },
+  postText: {
+    fontFamily: 'Merriweather, serif',
+    fontSize: 20,
+  },
   margin: {
     margin: `${theme.spacing.unit * 2} 0`,
   },
