@@ -14,11 +14,11 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, location } = this.props;
     return (
       <Fragment>
         <Header title="Readable app" />
-        <Post postDetail={post} />
+        <Post id={location.state.id} postDetail={post} />
       </Fragment>
     )
   }

@@ -1,4 +1,4 @@
-import { GET_POST_DETAIL } from '../actions/post';
+import { GET_POST_DETAIL, GET_POST_COMMENTS } from '../actions/post';
 
 export default function post ( state = {}, action ) {
   switch (action.type) {
@@ -6,7 +6,11 @@ export default function post ( state = {}, action ) {
       return {
         ...action.post
       }
-  
+    case GET_POST_COMMENTS:
+      return {
+        ...state,
+        comments: action.comments,
+      }
     default:
       return state;
   }
