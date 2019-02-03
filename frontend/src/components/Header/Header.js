@@ -13,6 +13,8 @@ import AddPostForm from '../AddPostForm/AddPostForm';
 
 import { styles } from './Header.styles';
 
+// TODO: transformar criar post em sua propria tela
+
 class Header extends Component {
   state = {
     open: false,
