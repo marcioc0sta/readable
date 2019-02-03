@@ -12,8 +12,11 @@ import { styles } from'./PostListItem.styles';
 import voteTypes from '../../helpers/voteTypes';
 import urlString from '../../helpers/urlString';
 
-const goToPostDetail = (history, title) => (
-  history.push(`/post/${urlString(title)}`)
+const goToPostDetail = (history, post) => (
+  history.push({
+    pathname: `/post/${urlString(post.title)}`,
+    state: {id: post.id},
+  })
 );
 
 const PostListItem = props => {
@@ -47,9 +50,8 @@ const PostListItem = props => {
         >
           <i className="fas fa-thumbs-down"></i>
         </Button>
-        {/* todo: onlclick vai para rota do post */}
         <Button
-          onClick={() => goToPostDetail(history, post.title)}
+          onClick={() => goToPostDetail(history, post)}
           className={classes.read}
           size="small"
           color="primary"

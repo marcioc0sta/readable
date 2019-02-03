@@ -1,28 +1,34 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import { handleGetPostDetail } from '../actions/post';
 
 import Header from '../components/Header/Header';
-import CategoriesList from '../components/CategoriesList/CategoriesList';
+import Post from '../components/Post/Post';
 
 class PostDetail extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, location } = this.props;
+    dispatch(handleGetPostDetail(location.state.id));
   }
 
   render() {
+    const { post } = this.props;
     return (
       <Fragment>
         <Header title="Readable app" />
-        <CategoriesList />
-        <div>postDetail</div>
+        <Post postDetail={post} />
       </Fragment>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = ({ post }) => {
+  return {
+    post,
+  }
 }
 
 
-export default connect()(PostDetail);
+export default withRouter(connect(mapStateToProps)(PostDetail));
