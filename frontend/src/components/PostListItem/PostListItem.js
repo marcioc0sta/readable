@@ -5,13 +5,19 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 
 import { styles } from'./PostListItem.styles';
 
 import voteTypes from '../../helpers/voteTypes';
+import urlString from '../../helpers/urlString';
+
+const goToPostDetail = (history, title) => (
+  history.push(`/post/${urlString(title)}`)
+);
 
 const PostListItem = props => {
-  const { classes, post, postVote } = props;
+  const { classes, post, postVote, history } = props;
   const { upvote, downvote } = voteTypes;
 
   return (
@@ -42,7 +48,8 @@ const PostListItem = props => {
           <i className="fas fa-thumbs-down"></i>
         </Button>
         {/* todo: onlclick vai para rota do post */}
-        <Button 
+        <Button
+          onClick={() => goToPostDetail(history, post.title)}
           className={classes.read}
           size="small"
           color="primary"
@@ -54,4 +61,4 @@ const PostListItem = props => {
   )
 }
 
-export default withStyles(styles)(PostListItem);
+export default withRouter(withStyles(styles)(PostListItem));
