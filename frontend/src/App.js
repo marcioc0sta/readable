@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleInitialData, handleGetAllCategories } from './actions/shared'
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import AllPostsPage from './pages/AllPostsPage';
@@ -8,11 +8,6 @@ import PostsFromCategory from './pages/PostsFromCategory';
 import PostDetail from './pages/PostDetail';
 
 class App extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(handleInitialData());
-    dispatch(handleGetAllCategories());
-  }
   render() {
     return (
       <Router>

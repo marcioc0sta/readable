@@ -29,6 +29,7 @@ const styles = theme => ({
     margin: `${theme.spacing.unit * 2} 0`,
   },
   padding: {
+    lineHeight: 'normal',
     padding: `0 ${theme.spacing.unit * 2}px 0 0`,
   },
 });
