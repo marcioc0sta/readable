@@ -4,6 +4,7 @@ import { get } from 'lodash';
 
 import { handleGetPostComments } from '../../actions/post';
 
+import NoItems from '../NoItems/NoItems';
 import CommentListItem from '../CommentListItem/CommentListItem';
 
 import * as Styled from './CommentsLIst.styles'
@@ -11,12 +12,18 @@ import * as Styled from './CommentsLIst.styles'
 class CommentsLIst extends Component {
   componentDidMount() {
     const { dispatch, postId } = this.props;
-
     dispatch(handleGetPostComments(postId));
   }
-  render() {
-    const { post } = this.props
+
+  handleList = () => {
+    const { post } = this.props;
     const commentsList = get(post, 'comments', []);
+
+    if (commentsList.length === 0) {
+      return (
+        <NoItems>There are no comments :(</NoItems>
+      )
+    }
 
     return (
       <Styled.CommentsList>
@@ -28,12 +35,16 @@ class CommentsLIst extends Component {
       </Styled.CommentsList>
     )
   }
+
+  render() {
+    return this.handleList();
+  }
 }
 
 const mapStateToProps = ({ post }) => {
   return {
-    post
-  }
+    post,
+  };
 }
 
 export default connect(mapStateToProps)(CommentsLIst);
