@@ -11,12 +11,10 @@ export default function postsOrdering (state = { orderBy: ''}, action) {
         orderBy: 'date'
       }
     case ORDER_POSTS_BY_VOTESCORE: 
- 
       return {
         ...state,
         orderBy: 'votescore'
       }
- 
     default:
       return state;
   }

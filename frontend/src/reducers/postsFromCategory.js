@@ -39,6 +39,6 @@ export default function postsFromCategory(state = {}, action) {
         ...orderedByVote,
       }
     default:
-      return state;
+      return {};
   }
 }
