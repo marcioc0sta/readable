@@ -64,6 +64,10 @@ export function handleAddPost(postContent) {
     category: postContent.category,
   }
   return dispatch => {
-    return addPost(post).then(result => dispatch(addPostAction(result)))
+    return addPost(post)
+      .then(result => dispatch(addPostAction(result)))
+      .catch(e => {
+        console.warn('Error in addPost: ', e);
+      });
   }
 }

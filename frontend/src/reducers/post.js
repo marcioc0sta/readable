@@ -28,7 +28,7 @@ export default function post(state = {}, action) {
         ]
       }
     case COMMENTVOTE:
-      const { comment } = action;      
+      const { comment } = action;
       const updatedComments = state.comments.map(item => (
         item.id === comment.id ? comment : item
       ));

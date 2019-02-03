@@ -13,7 +13,7 @@ import { styles } from './CommentListItem.styles';
 const CommentListItem = props => {
   const { comment, classes, commentVote } = props;
   const { upvote, downvote } = voteTypes;
-  console.log(comment.id)
+
   return (
     <Card className={classes.commentCard}>
       <CardContent>

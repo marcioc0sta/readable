@@ -106,7 +106,7 @@ export const addComment = async (parentId, postComment) => {
       timestamp: postComment.timestamp,
       body: postComment.body,
       author: postComment.author,
-      parentId,
+      parentId, // this is the post id
     })
   })
   const content = await rawResponse.json();
