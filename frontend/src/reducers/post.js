@@ -4,6 +4,7 @@ export default function post ( state = {}, action ) {
   switch (action.type) {
     case GET_POST_DETAIL:
       return {
+        ...state,
         ...action.post
       }
     case GET_POST_COMMENTS:

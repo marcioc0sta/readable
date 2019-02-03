@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import { withStyles } from '@material-ui/core/styles';
 
 import { handleGetPostComments } from '../../actions/post'
 
 import * as Styled from './Post.styles';
 
-const DATE_FORMAT = 'MMM Do YY'
+const DATE_FORMAT = 'MMM Do YY';
 
 class Post extends Component {
   componentDidMount() {
@@ -17,7 +19,17 @@ class Post extends Component {
   }
 
   render () {
-    const { title, category, author, voteScore, body, timestamp, } = this.props.postDetail;
+    const { classes } = this.props;
+    const { 
+      title,
+      category,
+      author,
+      voteScore,
+      body,
+      timestamp,
+      commentCount,
+    } = this.props.postDetail;
+
     const date = moment(timestamp).format(DATE_FORMAT);
     const commentsList = get(this.props.postDetail, 'comments', []);
 
@@ -37,12 +49,23 @@ class Post extends Component {
         <Typography variant="body1" gutterBottom>
           {body}
         </Typography>
-        {commentsList.map(item => {
-          return console.log(item)
-        })}
+        <br />
+        <Styled.CommentsContainer>
+          <Badge color="primary" className={classes.margin} badgeContent={commentCount}>
+            <Typography  className={classes.padding} variant="h6" gutterBottom>
+              Comments
+            </Typography>
+          </Badge>
+          <Styled.CommentLine />
+          <ul>
+            {commentsList.map(item => (
+              <li key={item.id} >{item.id}</li>
+            ))}
+          </ul>
+        </Styled.CommentsContainer>
       </Styled.Container>
     )
   }
 }
 
-export default connect()(Post);
+export default connect()(withStyles(Styled.styles)(Post));
