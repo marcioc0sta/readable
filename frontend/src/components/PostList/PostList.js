@@ -7,8 +7,6 @@ import { handlePostVote } from '../../actions/posts';
 
 import * as Styled from './PostList.styles';
 
-// TODO: tratamento para postlist vazio
-
 class PostList extends Component {
   postVote = (id, vote) => {
     const { dispatch } = this.props;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
@@ -6,44 +6,52 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 
 import getCategoryName from '../../helpers/getCategoryName';
-import { handlePostsFromCategory } from '../../actions/categories';
 import categoriesArr from '../../helpers/categoriesArr';
+
+import { handleGetAllCategories } from '../../actions/shared';
+import { handlePostsFromCategory } from '../../actions/categories';
 
 import * as Styled from './CategoriesList.styles';
 
-const CategoriesList = props => {
-  const { categories, classes } = props;
+class CategoriesList extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(handleGetAllCategories());
+  }
 
-  const handleClick = name => {
-    const { history, dispatch } = props
+  handleClick = name => {
+    const { history, dispatch } = this.props
 
     dispatch(handlePostsFromCategory(name))
       .then(history.push(`/category/${name}`))
   }
 
-  const activeCategory = getCategoryName(props.location.pathname);
+  render() {
+    const { categories, classes, location } = this.props;
+    const activeCategory = getCategoryName(location.pathname);
 
-  return (
-    <Styled.Container>
-      <Typography variant="h6" gutterBottom>
-        Categories:
+    return (
+      <Styled.Container>
+        <Typography variant="h6" gutterBottom>
+          Categories:
       </Typography>
-      {
-        categories.map(category => {
-          return (
-            <Chip
-              key={category}
-              color="primary"
-              className={classes.chip}
-              label={category}
-              onClick={() => handleClick(category)}
-              variant={category === activeCategory ? 'default' : 'outlined'}
-            />
-          )
-        })
-      }
-    </Styled.Container>
-  )
+        {
+          categories.map(category => {
+            return (
+              <Chip
+                key={category}
+                color="primary"
+                className={classes.chip}
+                label={category}
+                onClick={() => this.handleClick(category)}
+                variant={category === activeCategory ? 'default' : 'outlined'}
+              />
+            )
+          })
+        }
+      </Styled.Container>
+    )
+  }
 }
 
 const mapStateToProps = ({ categories }) => {

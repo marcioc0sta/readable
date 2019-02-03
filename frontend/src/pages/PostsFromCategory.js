@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 
 import getCategoryName from '../helpers/getCategoryName';
 import { handlePostsFromCategory } from '..//actions/categories';
 import Header from '../components/Header/Header';
 import PostList from '../components/PostList/PostList';
 import CategoriesList from '../components/CategoriesList/CategoriesList';
+import NoItems from '../components/NoItems/NoItems';
 
 class PostsFromCategory extends Component {
   componentDidMount() {
@@ -13,18 +15,29 @@ class PostsFromCategory extends Component {
     dispatch(handlePostsFromCategory(getCategoryName(location.pathname)))
   }
 
-  render() {
+  handlePostList = () => {
     const { postList, location } = this.props;
+    
+    if (isEmpty(postList)) {
+      return (<NoItems>No posts on this category :(</NoItems>);
+    }
+
     const activeCategory = getCategoryName(location.pathname);
 
+    return (
+      <PostList
+        listTitle={`All posts in: ${activeCategory}`}
+        postList={postList}
+      />
+    )
+  }
+
+  render() {
     return (
       <Fragment>
         <Header title="Readable app" />
         <CategoriesList />
-        <PostList 
-          listTitle={`All posts in: ${activeCategory}`} 
-          postList={postList} 
-        />
+        {this.handlePostList()}
       </Fragment>
     )
   }

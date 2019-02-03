@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { handleInitialData, handleGetAllCategories } from '../actions/shared';
+import { handleInitialData } from '../actions/shared';
 
 import Header from '../components/Header/Header';
 import PostList from '../components/PostList/PostList';
@@ -11,7 +11,6 @@ class AllPostsPage extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData());
-    dispatch(handleGetAllCategories());
   }
   
   render() {
