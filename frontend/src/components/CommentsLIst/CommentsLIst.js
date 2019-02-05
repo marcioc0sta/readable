@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { handleGetPostComments, handleCommentVote } from '../../actions/post';
 
+import AddCommentButton from '../AddCommentButton/AddCommentButton';
 import NoItems from '../NoItems/NoItems';
 import CommentListItem from '../CommentListItem/CommentListItem';
 
@@ -58,7 +58,11 @@ class CommentsLIst extends Component {
 
     if (commentsList.length === 0) {
       return (
-        <NoItems>There are no comments :(</NoItems>
+        <Fragment>
+          <NoItems>There are no comments :(</NoItems>
+          <AddCommentButton handleDialogOpen={this.handleDialogOpen} />
+          {this.renderDialog()}
+        </Fragment>
       )
     }
 
@@ -69,15 +73,7 @@ class CommentsLIst extends Component {
             <CommentListItem commentVote={this.commentVote} comment={comment} />
           </li>
         ))}
-        <Styled.ButtonWrapper>
-          <Button
-            variant="contained"
-            onClick={this.handleDialogOpen}
-            color="primary"
-          >
-            Add Comment
-          </Button>
-        </Styled.ButtonWrapper>
+        <AddCommentButton handleDialogOpen={this.handleDialogOpen} />
         {this.renderDialog()}
       </Styled.CommentsList>
     )
