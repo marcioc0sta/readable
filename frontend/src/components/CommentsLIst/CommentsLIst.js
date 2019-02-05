@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { handleGetPostComments, handleCommentVote } from '../../actions/post';
 
+import AddCommentForm from '../AddCommentForm/AddCommentForm';
 import AddCommentButton from '../AddCommentButton/AddCommentButton';
 import NoItems from '../NoItems/NoItems';
 import CommentListItem from '../CommentListItem/CommentListItem';
@@ -27,6 +28,7 @@ class CommentsLIst extends Component {
   }
 
   renderDialog = () => {
+    const { post } = this.props;
     return (
       <Dialog
         open={this.state.open}
@@ -36,7 +38,10 @@ class CommentsLIst extends Component {
       >
         <DialogTitle id="alert-dialog-title">{"Add a new post"}</DialogTitle>
         <DialogContent>
-          add post form passando id do post para o parentID
+          <AddCommentForm 
+            parentId={post.id}
+            handleDialogClose={this.handleDialogClose}
+          />
         </DialogContent>
       </Dialog>
     )

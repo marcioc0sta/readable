@@ -3,6 +3,7 @@ import {
   GET_POST_COMMENTS,
   ORDER_COMMENTS_BY_VOTESCORE,
   COMMENTVOTE,
+  ADD_COMMENT,
 } from '../actions/post';
 
 export default function post(state = {}, action) {
@@ -32,10 +33,14 @@ export default function post(state = {}, action) {
       const updatedComments = state.comments.map(item => (
         item.id === comment.id ? comment : item
       ));
-
       return {
         ...state,
         comments: updatedComments,
+      }
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.concat(action.comment),
       }
     default:
       return state;

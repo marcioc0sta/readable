@@ -1,9 +1,16 @@
-import { getPostDetail, getPostComments, voteComment } from '../api/ReadableApi';
+import { 
+  getPostDetail,
+  getPostComments,
+  voteComment,
+  addComment,
+ } from '../api/ReadableApi';
+ import guid from '../helpers/generateUUID';
 
 export const GET_POST_DETAIL = 'GET_POST_DETAIL';
 export const GET_POST_COMMENTS = 'GET_POST_COMMENTS';
 export const ORDER_COMMENTS_BY_VOTESCORE = 'ORDER_COMMENTS_BY_VOTESCORE';
 export const COMMENTVOTE = 'COMMENTVOTE';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 function postDetail(post) {
   return {
@@ -30,6 +37,29 @@ function commentVote(comment) {
   return {
     type: COMMENTVOTE,
     comment,
+  }
+}
+
+function addCommentAction(comment) {
+  return {
+    type: ADD_COMMENT,
+    comment,
+  }
+}
+
+export function handleAddComment(parentId, commentContent) {
+  const comment = {
+    id: guid(),
+    timestamp: commentContent.timestamp,
+    body: commentContent.body,
+    author: commentContent.author,
+  }
+  return dispatch => {
+    return addComment(parentId, comment)
+      .then(result => dispatch(addCommentAction(result)))
+      .catch(e => {
+        console.warn('Error in addComment: ', e);
+      });
   }
 }
 

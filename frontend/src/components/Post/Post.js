@@ -42,15 +42,9 @@ const Post = props => {
       </Typography>
       <br />
       <Styled.CommentsContainer>
-        <Badge
-          color="primary"
-          className={classes.margin}
-          badgeContent={commentCount}
-        >
-          <Typography className={classes.padding} variant="h6" gutterBottom>
-            Comments
-            </Typography>
-        </Badge>
+        <Typography className={classes.padding} variant="h6" gutterBottom>
+          Comments
+        </Typography>
         <Styled.CommentLine />
         <CommentsLIst postId={id} />
       </Styled.CommentsContainer>
