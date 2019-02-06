@@ -16,7 +16,12 @@ import { styles } from './CommentListItem.styles';
 class CommentListItem extends Component {
   state = {
     open: false,
+    showDeleteMessage: false,
   };
+
+  handleDeleteMessage = () => {
+    this.setState({ showDeleteMessage: !this.state.showDeleteMessage });
+  }
 
   handleDialogOpen = () => {
     this.setState({ open: true });
@@ -32,8 +37,8 @@ class CommentListItem extends Component {
         title="Edit Comment"
         open={this.state.open}
         handleClose={this.handleClose}
-      >  
-        <EditCommentForm 
+      >
+        <EditCommentForm
           comment={comment}
           handleDialogClose={this.handleDialogClose}
         />
@@ -44,6 +49,7 @@ class CommentListItem extends Component {
   render() {
     const { comment, classes, commentVote } = this.props;
     const { upvote, downvote } = voteTypes;
+    const { showDeleteMessage } = this.state;
 
     return (
       <Card className={classes.commentCard}>
@@ -51,7 +57,10 @@ class CommentListItem extends Component {
           <Typography className={classes.commentText} >
             {comment.body}
           </Typography>
-          <Typography className={classes.textSecondary} color="textSecondary" gutterBottom>
+          <Typography
+            className={classes.textSecondary}
+            color="textSecondary" gutterBottom
+          >
             author: {comment.author} / voteScore: {comment.voteScore}
           </Typography>
         </CardContent>
@@ -62,7 +71,7 @@ class CommentListItem extends Component {
               className={classes.upVote}
               variant="outlined"
             >
-              <i className="fas fa-thumbs-up"></i>
+              <i className="fas fa-thumbs-up"></i>This can not be undone
             </Button>
             <Button
               onClick={() => commentVote(comment.id, downvote)}
@@ -78,6 +87,25 @@ class CommentListItem extends Component {
             >
               <i className="fas fa-pencil-alt"></i>
             </Button>
+            {!showDeleteMessage &&
+              <Button
+                color="secondary"
+                title="Delete comment"
+                onClick={() => this.handleDeleteMessage()}
+              >
+                <i className="fas fa-trash"></i>
+              </Button>
+            }
+            {showDeleteMessage &&
+              <Button
+                title="Delete comment"
+                onClick={() => { }}
+                color="secondary"
+              >
+                <i className="fas fa-trash"></i> 
+                <span className={classes.deleteText}>Are you sure?</span>
+              </Button>
+            }
           </div>
         </CardActions>
         {this.renderDialog(comment)}

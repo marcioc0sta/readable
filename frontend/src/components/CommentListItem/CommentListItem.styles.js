@@ -17,6 +17,9 @@ const styles = () => ({
   upVote: {
     marginRight: '10px',
   },
+  deleteText: {
+    marginLeft: '10px',
+  },
 })
 
 export {

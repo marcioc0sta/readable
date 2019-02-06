@@ -26,12 +26,12 @@ class EditCommentForm extends Component {
     const { dispatch, handleDialogClose, comment } = this.props;
     const editedComment = this.state;
 
-    dispatch(handleEditComment(comment.id, editedComment)).then(handleDialogClose());
+    dispatch(handleEditComment(comment.id, editedComment))
+    .then(handleDialogClose());
   }
 
   render() {
     const { classes, handleDialogClose, comment } = this.props;
-    const { body } = this.state
     return (
       <form
         className={classes.container} 
