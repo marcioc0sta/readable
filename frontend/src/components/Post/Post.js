@@ -18,7 +18,6 @@ const Post = props => {
     voteScore,
     body,
     timestamp,
-    commentCount,
   } = props.postDetail;
 
   const date = moment(timestamp).format(DATE_FORMAT);

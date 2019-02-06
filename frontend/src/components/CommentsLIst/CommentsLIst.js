@@ -29,7 +29,7 @@ class CommentsLIst extends Component {
     const { post } = this.props;
     return (
       <Modal
-        title="Your Comment"
+        title="Add Comment"
         open={this.state.open}
         handleClose={this.handleClose}
       >  
