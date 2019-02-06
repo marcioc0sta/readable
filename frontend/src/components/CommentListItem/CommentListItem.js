@@ -5,8 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
 import voteTypes from '../../helpers/voteTypes';
+
+import { handleDeleteComment } from '../../actions/post';
 
 import Modal from '../Modal/Modal';
 import EditCommentForm from '../EditCommentForm/EditCommentForm';
@@ -44,6 +47,11 @@ class CommentListItem extends Component {
         />
       </Modal>
     )
+  }
+
+  commentDelete = commentId => {
+    const { dispatch } = this.props;
+    dispatch(handleDeleteComment(commentId)).then(this.handleDeleteMessage());
   }
 
   render() {
@@ -99,10 +107,10 @@ class CommentListItem extends Component {
             {showDeleteMessage &&
               <Button
                 title="Delete comment"
-                onClick={() => { }}
+                onClick={() => this.commentDelete(comment.id)}
                 color="secondary"
               >
-                <i className="fas fa-trash"></i> 
+                <i className="fas fa-trash"></i>
                 <span className={classes.deleteText}>Are you sure?</span>
               </Button>
             }
@@ -114,4 +122,4 @@ class CommentListItem extends Component {
   }
 }
 
-export default withStyles(styles)(CommentListItem);
+export default connect()(withStyles(styles)(CommentListItem));

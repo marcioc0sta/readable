@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
-import { handleAddComment } from '../../actions/post';
+import { handleAddComment, handleGetPostComments } from '../../actions/post';
 
 import { styles } from './AddCommentForm.styles';
 
@@ -27,12 +27,17 @@ class AddCommentForm extends Component {
     const { dispatch, handleDialogClose, parentId } = this.props;
     const comment = this.state;
 
-    dispatch(handleAddComment(parentId, comment)).then(handleDialogClose());
+    dispatch(handleAddComment(parentId, comment))
+    .then(() => {
+      handleDialogClose();
+      dispatch(handleGetPostComments(parentId));
+    })
   }
 
   render() {
     const { classes, handleDialogClose } = this.props;
     const { body, author } = this.state
+
     return (
       <form
         className={classes.container} 

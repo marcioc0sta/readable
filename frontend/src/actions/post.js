@@ -4,6 +4,7 @@ import {
   voteComment,
   addComment,
   editComment,
+  deleteComment,
  } from '../api/ReadableApi';
  import guid from '../helpers/generateUUID';
 
@@ -13,6 +14,7 @@ export const ORDER_COMMENTS_BY_VOTESCORE = 'ORDER_COMMENTS_BY_VOTESCORE';
 export const COMMENTVOTE = 'COMMENTVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 function postDetail(post) {
   return {
@@ -53,6 +55,23 @@ function editCommentAction(comment) {
   return {
     type: EDIT_COMMENT,
     comment,
+  }
+}
+
+function deleteCommentAction(comment) {
+  return {
+    type: DELETE_COMMENT,
+    comment,
+  }
+}
+
+export function handleDeleteComment(id) {
+  return dispatch => {
+    return deleteComment(id)
+    .then(result => dispatch(deleteCommentAction(result)))
+    .catch(e => {
+      console.warn('Error in deleteComment: ', e);
+    });
   }
 }
 

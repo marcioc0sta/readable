@@ -5,6 +5,7 @@ import {
   COMMENTVOTE,
   ADD_COMMENT,
   EDIT_COMMENT,
+  DELETE_COMMENT,
 } from '../actions/post';
 
 export default function post(state = {}, action) {
@@ -50,6 +51,18 @@ export default function post(state = {}, action) {
       return {
         ...state,
         comments: commentsList,
+      }
+    case DELETE_COMMENT:
+      const { comments } = state;
+      let commentsAfterDelete = comments;
+
+      commentsAfterDelete.splice(
+          comments.findIndex(item => item.id === action.comment.id),1
+        );
+
+      return {
+        ...state,
+        comments: commentsAfterDelete,
       }
     default:
       return state;
