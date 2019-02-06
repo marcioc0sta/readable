@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { handleGetPostComments, handleCommentVote } from '../../actions/post';
 
+import Modal from '../Modal/Modal';
 import AddCommentForm from '../AddCommentForm/AddCommentForm';
 import AddCommentButton from '../AddCommentButton/AddCommentButton';
 import NoItems from '../NoItems/NoItems';
@@ -30,20 +28,16 @@ class CommentsLIst extends Component {
   renderDialog = () => {
     const { post } = this.props;
     return (
-      <Dialog
+      <Modal
+        title="Your Comment"
         open={this.state.open}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Add a new post"}</DialogTitle>
-        <DialogContent>
-          <AddCommentForm 
-            parentId={post.id}
-            handleDialogClose={this.handleDialogClose}
-          />
-        </DialogContent>
-      </Dialog>
+        handleClose={this.handleClose}
+      >  
+        <AddCommentForm 
+          parentId={post.id}
+          handleDialogClose={this.handleDialogClose}
+        />
+      </Modal>
     )
   }
 

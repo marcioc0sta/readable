@@ -1,6 +1,5 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 

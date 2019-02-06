@@ -25,19 +25,29 @@ const CommentListItem = props => {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions} disableActionSpacing>
-        <Button
-          onClick={() => commentVote(comment.id, upvote)}
-          className={classes.upVote}
-          variant="outlined"
-        >
-          <i className="fas fa-thumbs-up"></i>
-        </Button>
-        <Button
-          onClick={() => commentVote(comment.id, downvote)}
-          variant="outlined"
-        >
-          <i className="fas fa-thumbs-down"></i>
-        </Button>
+        <div>
+          <Button
+            onClick={() => commentVote(comment.id, upvote)}
+            className={classes.upVote}
+            variant="outlined"
+          >
+            <i className="fas fa-thumbs-up"></i>
+          </Button>
+          <Button
+            onClick={() => commentVote(comment.id, downvote)}
+            variant="outlined"
+          >
+            <i className="fas fa-thumbs-down"></i>
+          </Button>
+        </div>
+        <div>
+          <Button
+            title="Edit comment"
+            onClick={() => {}}
+          >
+            <i className="fas fa-pencil-alt"></i>
+          </Button>
+        </div>
       </CardActions>
     </Card>
   )

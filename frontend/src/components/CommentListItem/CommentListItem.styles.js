@@ -12,6 +12,7 @@ const styles = () => ({
   },
   actions: {
     display: 'flex',
+    justifyContent: 'space-between',
   },
   upVote: {
     marginRight: '10px',
