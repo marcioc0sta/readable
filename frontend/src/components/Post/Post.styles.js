@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: 24px;
   margin: 0 auto;
   max-width: 740px;
+  padding: 24px;
+  position: relative;
 `;
 
 const CommentsContainer = styled.div`
@@ -14,6 +15,15 @@ const CommentLine = styled.hr`
   height: 1px;
   background-color: #ddd;
   border: none;
+`;
+
+const PostActionsContainer = styled.div`
+  align-items: center;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  right: 30px;
+  position: fixed;
 `
 
 const styles = theme => ({
@@ -32,6 +42,13 @@ const styles = theme => ({
     lineHeight: 'normal',
     padding: `0 ${theme.spacing.unit * 2}px 0 0`,
   },
+  actionButtom: {
+    marginBottom: 20,
+  },
+  showActionButtons: {
+    transition: 'all .3s ease-out',
+    transform: 'rotate(45deg)',
+  }
 });
 
 export {
@@ -39,4 +56,5 @@ export {
   CommentsContainer,
   styles,
   CommentLine,
+  PostActionsContainer,
 }

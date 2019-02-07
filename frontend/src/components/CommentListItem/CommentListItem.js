@@ -79,7 +79,7 @@ class CommentListItem extends Component {
               className={classes.upVote}
               variant="outlined"
             >
-              <i className="fas fa-thumbs-up"></i>This can not be undone
+              <i className="fas fa-thumbs-up"></i>
             </Button>
             <Button
               onClick={() => commentVote(comment.id, downvote)}
