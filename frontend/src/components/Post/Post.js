@@ -1,8 +1,13 @@
-import React, { Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+
+import { handleDeletePost } from '../../actions/posts';
+import { handleInitialData } from '../../actions/shared';
 
 import CommentsLIst from '../CommentsLIst/CommentsLIst';
 
@@ -12,17 +17,31 @@ const DATE_FORMAT = 'MMM Do YY';
 
 class Post extends Component {
   state = {
+    showConfirmDeleteButton: false,
     showActionButtons: false,
   }
 
   handleActionButtons = () => {
     this.setState({
       showActionButtons: !this.state.showActionButtons,
+      showConfirmDeleteButton: false,
     })
   }
 
+  handleConfirmDelete = () => {
+    this.setState({
+      showConfirmDeleteButton: !this.state.showConfirmDeleteButton,
+    })
+  }
+
+  handlePostDelete = () => {
+    const { dispatch, id, history } = this.props;
+    dispatch(handleDeletePost(id))
+    dispatch(handleInitialData()).then(history.push('/'));
+  }
+
   render() {
-    const { showActionButtons } = this.state;
+    const { showActionButtons, showConfirmDeleteButton } = this.state;
     const { classes, id } = this.props;
     const {
       title,
@@ -64,20 +83,34 @@ class Post extends Component {
             <Fragment>
               <Fab
                 className={classes.actionButtom}
-                onClick={() => {}}
+                onClick={() => { }}
                 size="small"
                 color="default"
               >
                 <i className="fa fa-pencil-alt"></i>
               </Fab>
-              <Fab
-                className={classes.actionButtom}
-                onClick={() => {}}
-                size="small"
-                color="secondary"
-              >
-                <i className="fa fa-trash"></i>
-              </Fab>
+              {!showConfirmDeleteButton &&
+                <Fab
+                  className={classes.actionButtom}
+                  onClick={this.handleConfirmDelete}
+                  size="small"
+                  color="secondary"
+                >
+                  <i className="fa fa-trash"></i>
+                </Fab>
+              }
+              {showConfirmDeleteButton &&
+                <Fab
+                  className={classes.actionButtom}
+                  onClick={() => this.handlePostDelete()}
+                  size="small"
+                  color="secondary"
+                  variant="extended"
+                >
+                  <i className="fa fa-trash"></i>
+                  <span className={classes.deleteConfirm}>Are you sure?</span>
+                </Fab>
+              }
             </Fragment>
           }
           <Fab
@@ -94,4 +127,4 @@ class Post extends Component {
   }
 }
 
-export default withStyles(Styled.styles)(Post);
+export default withRouter(connect()(withStyles(Styled.styles)(Post)));

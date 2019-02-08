@@ -48,6 +48,9 @@ const styles = theme => ({
   showActionButtons: {
     transition: 'all .3s ease-out',
     transform: 'rotate(45deg)',
+  },
+  deleteConfirm: {
+    marginLeft: 5,
   }
 });
 

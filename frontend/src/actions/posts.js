@@ -1,4 +1,4 @@
-import { votePost, addPost } from '../api/ReadableApi';
+import { votePost, addPost, deletePost } from '../api/ReadableApi';
 import guid from '../helpers/generateUUID';
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
@@ -6,6 +6,7 @@ export const ORDER_POSTS_BY_DATE = 'ORDER_POSTS_BY_DATE';
 export const ORDER_POSTS_BY_VOTESCORE = 'ORDER_POSTS_BY_VOTESCORE';
 export const POSTVOTE = 'POSTVOTE';
 export const ADD_POST = 'ADD_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 export function receivePosts(posts) {
   return {
@@ -32,6 +33,25 @@ function postVote(post) {
   return {
     type: POSTVOTE,
     post,
+  }
+}
+
+function deletePostAction(post) {
+  return {
+    type: DELETE_POST,
+    post,
+  }
+}
+
+export function handleDeletePost(id) {
+  return dispatch => {
+    return deletePost(id)
+      .then(result => {
+        dispatch(deletePostAction(result))
+      })
+      .catch(e => {
+        console.warn('Error in deletePost: ', e);
+      });
   }
 }
 

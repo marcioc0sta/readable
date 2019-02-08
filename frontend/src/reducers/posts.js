@@ -4,13 +4,13 @@ import {
   ORDER_POSTS_BY_VOTESCORE,
   POSTVOTE,
   ADD_POST,
+  DELETE_POST,
 } from '../actions/posts';
 
 export default function posts (state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return {
-        ...state,
         ...action.posts,
       }
     case ORDER_POSTS_BY_DATE:
@@ -45,6 +45,21 @@ export default function posts (state = {}, action) {
         ...state,
         [defineKey]: action.post
       }
+    case DELETE_POST:
+    const deletedKey = Object.keys(state).find(key => (
+      state[key].id === action.post.id
+    ));
+
+    const newPostList = Object.keys(state).reduce((object, key) => {
+      if (key !== deletedKey) {
+        object[key] = state[key]
+      }
+      return object
+    }, {})
+
+    return {
+      ...newPostList,
+    }
     default:
       return state;
   }

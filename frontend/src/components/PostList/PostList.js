@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import { orderPostsByTime, orderPostsByvote } from '../../actions/posts';
-import { handlePostVote } from '../../actions/posts';
+import { orderPostsByTime, orderPostsByvote, handlePostVote } from '../../actions/posts';
 
 import PostListItem from '../PostListItem/PostListItem';
 
