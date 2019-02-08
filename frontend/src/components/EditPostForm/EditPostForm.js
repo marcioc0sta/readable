@@ -14,7 +14,6 @@ import { styles } from './EditPostForm.styles';
 
 class EditPostForm extends Component {
   state = {
-    timestamp: Date.now(),
     title: '',
     body: '',
   };
