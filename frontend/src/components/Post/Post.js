@@ -6,6 +6,8 @@ import Fab from '@material-ui/core/Fab';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
+import urlString from '../../helpers/urlString';
+
 import { handleDeletePost } from '../../actions/posts';
 import { handleInitialData } from '../../actions/shared';
 
@@ -40,9 +42,16 @@ class Post extends Component {
     dispatch(handleInitialData()).then(history.push('/'));
   }
 
+  goToPostEdit = (history, post) => (
+    history.push({
+      pathname: `/edit-post/${urlString(post.title)}`,
+      state: {post},
+    })
+  );
+
   render() {
     const { showActionButtons, showConfirmDeleteButton } = this.state;
-    const { classes, id } = this.props;
+    const { classes, id, history } = this.props;
     const {
       title,
       category,
@@ -83,7 +92,7 @@ class Post extends Component {
             <Fragment>
               <Fab
                 className={classes.actionButtom}
-                onClick={() => { }}
+                onClick={() => this.goToPostEdit(history, this.props.postDetail)}
                 size="small"
                 color="default"
               >
