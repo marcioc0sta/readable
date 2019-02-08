@@ -5,6 +5,7 @@ import {
   addComment,
   editComment,
   deleteComment,
+  editPost,
  } from '../api/ReadableApi';
  import guid from '../helpers/generateUUID';
 
@@ -15,6 +16,7 @@ export const COMMENTVOTE = 'COMMENTVOTE';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const EDIT_POST = 'EDIT_POST';
 
 function postDetail(post) {
   return {
@@ -62,6 +64,23 @@ function deleteCommentAction(comment) {
   return {
     type: DELETE_COMMENT,
     comment,
+  }
+}
+
+function editPostAction(post) {
+  return {
+    type: EDIT_POST,
+    post,
+  }
+}
+
+export function handleEditPost(id, editOptions){
+  return dispatch => {
+    return editPost(id, editOptions)
+      .then(result => dispatch(editPostAction(result)))
+      .catch(e => {
+        console.warn('Error in editPost: ', e);
+      });
   }
 }
 

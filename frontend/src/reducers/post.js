@@ -6,6 +6,7 @@ import {
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
+  EDIT_POST,
 } from '../actions/post';
 
 export default function post(state = {}, action) {
@@ -63,6 +64,11 @@ export default function post(state = {}, action) {
       return {
         ...state,
         comments: commentsAfterDelete,
+      }
+    case EDIT_POST:
+      return {
+        ...state,
+        ...action.post
       }
     default:
       return state;

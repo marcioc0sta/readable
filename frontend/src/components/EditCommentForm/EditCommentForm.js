@@ -14,6 +14,14 @@ class EditCommentForm extends Component {
     body: '',
   };
 
+  componentDidMount() {
+    const { comment } = this.props;
+
+    this.setState({
+      body: comment.body,
+    })
+  }
+
   handleChange = fieldValue => event => {
     this.setState({
       [fieldValue]: event.target.value,

@@ -1,9 +1,14 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import { withRouter } from 'react-router-dom'
+
+import urlString from '../../helpers/urlString';
+
+import { handleEditPost } from '../../actions/post';
 
 import { styles } from './EditPostForm.styles';
 
@@ -14,6 +19,15 @@ class EditPostForm extends Component {
     body: '',
   };
 
+  componentDidMount() {
+    const { post } = this.props;
+
+    this.setState({
+      title: post.title,
+      body: post.body,
+    })
+  }
+
   handleChange = fieldValue => event => {
     this.setState({
       [fieldValue]: event.target.value,
@@ -23,9 +37,15 @@ class EditPostForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { dispatch, post } = this.props;
+    const { dispatch, post, history } = this.props;
+    const editedPost = this.state;
 
-
+    dispatch(handleEditPost(post.id, editedPost)).then(
+      history.push({
+        pathname: `/post/${urlString(editedPost.title)}`,
+        state: { id: post.id },
+      })
+    )
   }
 
   render() {
@@ -36,7 +56,7 @@ class EditPostForm extends Component {
         <Typography variant="h6" gutterBottom>
           {`Editing post: ${post.title}`}
         </Typography>
-        <form 
+        <form
           className={classes.form}
           onSubmit={e => this.handleSubmit(e)}
           autoComplete="off"
@@ -72,4 +92,4 @@ class EditPostForm extends Component {
   }
 }
 
-export default connect()(withStyles(styles)(EditPostForm));
+export default withRouter(connect()(withStyles(styles)(EditPostForm)));
