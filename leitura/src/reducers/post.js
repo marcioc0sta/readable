@@ -9,6 +9,8 @@ import {
   EDIT_POST,
 } from '../actions/post';
 
+import { POSTVOTE } from '../actions/posts';
+
 export default function post(state = {}, action) {
   switch (action.type) {
     case GET_POST_DETAIL:
@@ -69,6 +71,11 @@ export default function post(state = {}, action) {
       return {
         ...state,
         ...action.post
+      }
+    case POSTVOTE:
+      return {
+        ...state,
+        voteScore: action.post.voteScore,
       }
     default:
       return state;

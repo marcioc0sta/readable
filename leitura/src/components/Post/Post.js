@@ -6,9 +6,10 @@ import Fab from '@material-ui/core/Fab';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
+import voteTypes from '../../helpers/voteTypes';
 import urlString from '../../helpers/urlString';
 
-import { handleDeletePost } from '../../actions/posts';
+import { handleDeletePost, handlePostVote } from '../../actions/posts';
 import { handleInitialData } from '../../actions/shared';
 
 import CommentsLIst from '../CommentsLIst/CommentsLIst';
@@ -45,9 +46,14 @@ class Post extends Component {
   goToPostEdit = (history, post) => (
     history.push({
       pathname: `/edit-post/${urlString(post.title)}`,
-      state: {post},
+      state: { post },
     })
   );
+
+  postVote = (id, vote) => {
+    const { dispatch } = this.props;
+    return dispatch(handlePostVote(id, vote));
+  }
 
   render() {
     const { showActionButtons, showConfirmDeleteButton } = this.state;
@@ -60,7 +66,7 @@ class Post extends Component {
       body,
       timestamp,
     } = this.props.postDetail;
-
+    const { upvote, downvote } = voteTypes;
     const date = moment(timestamp).format(DATE_FORMAT);
 
     return (
@@ -91,6 +97,25 @@ class Post extends Component {
           {showActionButtons &&
             <Fragment>
               <Fab
+                title="UpVote"
+                className={classes.actionButtom}
+                onClick={() => this.postVote(id, upvote)}
+                size="small"
+                color="default"
+              >
+                <i className="fa fa-thumbs-up"></i>
+              </Fab>
+              <Fab
+                title="DownVote"
+                className={classes.actionButtom}
+                onClick={() => this.postVote(id, downvote)}
+                size="small"
+                color="default"
+              >
+                <i className="fa fa-thumbs-down"></i>
+              </Fab>
+              <Fab
+                title="Edit Post"
                 className={classes.actionButtom}
                 onClick={() => this.goToPostEdit(history, this.props.postDetail)}
                 size="small"
@@ -100,6 +125,7 @@ class Post extends Component {
               </Fab>
               {!showConfirmDeleteButton &&
                 <Fab
+                  title="Delete Post"
                   className={classes.actionButtom}
                   onClick={this.handleConfirmDelete}
                   size="small"
@@ -110,6 +136,7 @@ class Post extends Component {
               }
               {showConfirmDeleteButton &&
                 <Fab
+                  title="Delete Post"
                   className={classes.actionButtom}
                   onClick={() => this.handlePostDelete()}
                   size="small"
