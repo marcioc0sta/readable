@@ -8,14 +8,16 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 import { styles } from './Header.styles';
 
+const addPostURL = '/add-post';
+
 class Header extends Component {
   goToAddPostPage = () => {
     const { history } = this.props;
-    history.push('/add-post');
+    history.push(addPostURL);
   }
 
   render() {
-    const { title, classes } = this.props;
+    const { title, classes, history } = this.props;
     return (
       <AppBar position="static" color="primary">
         <Toolbar>
@@ -24,13 +26,15 @@ class Header extends Component {
               {title}
             </Typography>
           </NavLink>
-          <Button 
-            onClick={this.goToAddPostPage}
-            className={classes.addPost} 
-            color="inherit"
-          >
-            Add post
-          </Button>
+          {history.location.pathname !== addPostURL &&
+            <Button
+              onClick={this.goToAddPostPage}
+              className={classes.addPost}
+              color="inherit"
+            >
+              Add post
+            </Button>
+          }
         </Toolbar>
       </AppBar>
     )
