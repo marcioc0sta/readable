@@ -7,6 +7,7 @@ import AllPostsPage from './pages/AllPostsPage';
 import PostsFromCategory from './pages/PostsFromCategory';
 import PostDetail from './pages/PostDetail';
 import EditPost from './pages/EditPost'
+import AddPostPage from './pages/AddPostPage';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
           <Route path="/category/:catName" component={PostsFromCategory} />
           <Route path="/post/:title" component={PostDetail} />
           <Route path="/edit-post/:title" component={EditPost} />
+          <Route path="/add-post" component={AddPostPage} />
         </div>
       </Router>
     );

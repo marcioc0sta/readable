@@ -4,15 +4,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import { styles } from './Header.styles';
 
-// TODO: transformar criar post em sua propria tela
-
 class Header extends Component {
   goToAddPostPage = () => {
-    alert('fazer pagina de adicionar post')
+    const { history } = this.props;
+    history.push('/add-post');
   }
 
   render() {
@@ -38,4 +37,4 @@ class Header extends Component {
   }
 }
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));
