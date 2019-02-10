@@ -2,6 +2,7 @@ const styles = () => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    padding: 30,
   },
   textField: {
     width: '100%',
@@ -15,7 +16,12 @@ const styles = () => ({
   },
   button: {
     marginRight: 20,
-  }
+  },
+  form: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '100%',
+  },
 });
 
 export { styles };
