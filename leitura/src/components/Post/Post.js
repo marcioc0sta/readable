@@ -73,7 +73,7 @@ class Post extends Component {
         </Typography>
         <hr />
         <Typography color="textSecondary" gutterBottom>
-          by: {author} / voteScore: {voteScore} / Post date: {date}
+          by: {author} / vote score: {voteScore} / Post date: {date}
         </Typography>
         <br />
         <Typography className={classes.postText} variant="body1" gutterBottom>
