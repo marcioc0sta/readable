@@ -10,11 +10,10 @@ import { withRouter } from 'react-router-dom';
 import { styles } from'./PostListItem.styles';
 
 import voteTypes from '../../helpers/voteTypes';
-import urlString from '../../helpers/urlString';
 
 const goToPostDetail = (history, post) => (
   history.push({
-    pathname: `/post/${urlString(post.title)}`,
+    pathname: `/post/${post.id}`,
     state: {id: post.id},
   })
 );

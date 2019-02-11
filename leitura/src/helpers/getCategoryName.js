@@ -1,5 +1,5 @@
 const getCategoryName = pathname => (
-  pathname.replace('/category/', '')
+  pathname.replace('/', '')
 );
 
 export default getCategoryName;

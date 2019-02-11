@@ -23,7 +23,7 @@ class CategoriesList extends Component {
     const { history, dispatch } = this.props
 
     dispatch(handlePostsFromCategory(name))
-      .then(history.push(`/category/${name}`))
+      .then(history.push(`/${name}`))
   }
 
   render() {

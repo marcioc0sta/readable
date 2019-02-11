@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
 import voteTypes from '../../helpers/voteTypes';
-import urlString from '../../helpers/urlString';
 
 import { handleDeletePost, handlePostVote } from '../../actions/posts';
 import { handleInitialData } from '../../actions/shared';
@@ -45,7 +44,7 @@ class Post extends Component {
 
   goToPostEdit = (history, post) => (
     history.push({
-      pathname: `/edit-post/${urlString(post.title)}`,
+      pathname: `/edit-post/${post.id}`,
       state: { post },
     })
   );
