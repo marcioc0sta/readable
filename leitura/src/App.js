@@ -20,12 +20,13 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={AllPostsPage} />
           <Route path="/add-post" component={AddPostPage} />
-          <Route path="/post/:id" render={props => {
+          <Route path="/edit-post/:id" component={EditPost} />
+          <Route path="/:category/:id" render={props => {
             const { location } = props;
-            if(location.state === undefined) return <Page404 />
+            const { post } = this.props;
+            if(location.state === undefined || post.deleted) return <Page404 />
             return <PostDetail {...props} />
           }} />
-          <Route path="/edit-post/:id" component={EditPost} />
           <Route path="/:category" render={props => {
             const activeCategory = getCategoryName(props.location.pathname);
             const { categories } = this.props;
@@ -38,9 +39,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ categories }) => {
+const mapStateToProps = ({ categories, post }) => {
   return {
     categories: categoriesArr(categories),
+    post,
   }
 }
 

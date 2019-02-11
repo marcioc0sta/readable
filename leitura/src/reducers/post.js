@@ -9,7 +9,7 @@ import {
   EDIT_POST,
 } from '../actions/post';
 
-import { POSTVOTE } from '../actions/posts';
+import { POSTVOTE, DELETE_POST } from '../actions/posts';
 
 export default function post(state = {}, action) {
   switch (action.type) {
@@ -79,6 +79,11 @@ export default function post(state = {}, action) {
         ...state,
         voteScore: action.post.voteScore,
       }
+    case DELETE_POST: {
+      return {
+        deleted: true
+      }
+    }
     default:
       return state;
   }

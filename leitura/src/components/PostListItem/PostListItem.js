@@ -13,8 +13,11 @@ import voteTypes from '../../helpers/voteTypes';
 
 const goToPostDetail = (history, post) => (
   history.push({
-    pathname: `/post/${post.id}`,
-    state: {id: post.id},
+    pathname: `/${post.category}/${post.id}`,
+    state: {
+      id: post.id,
+      deleted: post.deleted,
+    },
   })
 );
 
@@ -32,7 +35,7 @@ const PostListItem = props => {
           {post.title}
         </Typography>
         <Typography color="textSecondary" gutterBottom>
-          author: {post.author} / voteScore: {post.voteScore}
+          author: {post.author} / voteScore: {post.voteScore} / Comments: {post.commentCount}
         </Typography>
       </CardContent>
       <CardActions className={classes.actions} disableActionSpacing>
