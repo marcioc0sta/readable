@@ -81,7 +81,7 @@ export default function post(state = {}, action) {
       }
     case DELETE_POST: {
       return {
-        deleted: true
+        ...action.post
       }
     }
     default:

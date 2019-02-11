@@ -23,8 +23,7 @@ class App extends Component {
           <Route path="/edit-post/:id" component={EditPost} />
           <Route path="/:category/:id" render={props => {
             const { location } = props;
-            const { post } = this.props;
-            if(location.state === undefined || post.deleted) return <Page404 />
+            if(location.state === undefined) return <Page404 />
             return <PostDetail {...props} />
           }} />
           <Route path="/:category" render={props => {
@@ -39,10 +38,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, post }) => {
+const mapStateToProps = ({ categories }) => {
   return {
     categories: categoriesArr(categories),
-    post,
   }
 }
 
