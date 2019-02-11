@@ -7,6 +7,8 @@ import { handleGetPostDetail } from '../actions/post';
 import Header from '../components/Header/Header';
 import Post from '../components/Post/Post';
 
+import Page404 from './Page404'
+
 class PostDetail extends Component {
   componentDidMount() {
     const { dispatch, location } = this.props;
@@ -17,8 +19,13 @@ class PostDetail extends Component {
     const { post, location } = this.props;
     return (
       <Fragment>
-        <Header title="Readable app" />
-        <Post id={location.state.id} postDetail={post} />
+        {post.deleted || post.id === undefined
+          ? <Page404 />
+          : <Fragment>
+              <Header title="Readable app" />
+              <Post id={location.state.id} postDetail={post} />
+            </Fragment>
+        }
       </Fragment>
     )
   }

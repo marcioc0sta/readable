@@ -14,10 +14,7 @@ import voteTypes from '../../helpers/voteTypes';
 const goToPostDetail = (history, post) => (
   history.push({
     pathname: `/${post.category}/${post.id}`,
-    state: {
-      id: post.id,
-      deleted: post.deleted,
-    },
+    state: { id: post.id },
   })
 );
 

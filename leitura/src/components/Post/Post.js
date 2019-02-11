@@ -40,7 +40,8 @@ class Post extends Component {
   handlePostDelete = () => {
     const { dispatch, id, history } = this.props;
     dispatch(handleDeletePost(id))
-    dispatch(handleInitialData()).then(history.push('/'));
+    dispatch(handleInitialData())
+    history.push('/');
   }
 
   goToPostEdit = (history, post) => (
