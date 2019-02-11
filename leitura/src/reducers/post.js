@@ -45,6 +45,7 @@ export default function post(state = {}, action) {
     case ADD_COMMENT:
       return {
         ...state,
+        commentCount: state.commentCount + 1,
         comments: state.comments.concat(action.comment),
       }
     case EDIT_COMMENT:
@@ -65,6 +66,7 @@ export default function post(state = {}, action) {
 
       return {
         ...state,
+        commentCount: state.commentCount - 1,
         comments: commentsAfterDelete,
       }
     case EDIT_POST:

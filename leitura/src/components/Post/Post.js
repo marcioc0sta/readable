@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
@@ -64,6 +65,7 @@ class Post extends Component {
       voteScore,
       body,
       timestamp,
+      commentCount,
     } = this.props.postDetail;
     const { upvote, downvote } = voteTypes;
     const date = moment(timestamp).format(DATE_FORMAT);
@@ -86,9 +88,12 @@ class Post extends Component {
         </Typography>
         <br />
         <Styled.CommentsContainer>
+        <Badge color="primary" badgeContent={commentCount} >
           <Typography className={classes.padding} variant="h6" gutterBottom>
             Comments
           </Typography>
+        </Badge>
+
           <Styled.CommentLine />
           <CommentsLIst postId={id} />
         </Styled.CommentsContainer>
